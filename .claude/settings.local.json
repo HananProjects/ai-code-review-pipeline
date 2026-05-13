@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /Users/hanan/CodeReview/scripts/dev.sh /Users/hanan/CodeReview/scripts/deploy_cloud_run.sh /Users/hanan/CodeReview/scripts/setup_webhook.py)",
+      "Bash(python3.13 --version)",
+      "Bash(pyenv versions *)"
+    ]
+  }
+}

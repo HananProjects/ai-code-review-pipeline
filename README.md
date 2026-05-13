@@ -10,16 +10,6 @@ An autonomous multi-agent system that reviews GitHub Pull Requests in real time 
 
 ---
 
-## Demo
-
-> Open a pull request → AI reviews it in ~45 seconds → inline comments appear on the exact lines with issues
-
-![Demo](docs/demo.gif)
-
-*(Replace with a screen recording of a live PR review)*
-
----
-
 ## Architecture
 
 ```mermaid

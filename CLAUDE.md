@@ -133,6 +133,7 @@ python scripts/setup_webhook.py --repo owner/repo --url https://YOUR-SERVICE-URL
 
 ## Recent Changes
 
+- 2026-06-17 — Fixed `github_review.py`: added fallback to include raw agent output when no structured `### Finding N:` blocks parse (was silently posting empty write-ups). Made `parser.py` regex more flexible (`(?:#{2,3}\s+|\*\*)?Finding\s+\d+`) to match varied LLM output formats.
 - 2026-06-15 — Repo cloned to `B:\AI Code Review Pipeline\`; CLAUDE.md created; added to Obsidian vault
 
 ---

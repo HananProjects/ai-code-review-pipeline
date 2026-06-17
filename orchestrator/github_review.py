@@ -35,24 +35,32 @@ def post_review(
         verdicts[agent_name] = extract_verdict(output)
         findings = parse_findings(output)
 
-        for f in findings:
-            comment_body = f"**[{agent_name.capitalize()}] {f.title}**\n\n{f.body}"
-            if (
-                f.file
-                and f.line
-                and f.file in line_index
-                and f.line in line_index[f.file]
-            ):
-                inline_comments.append(
-                    {
-                        "path": f.file,
-                        "line": f.line,
-                        "side": "RIGHT",
-                        "body": comment_body,
-                    }
-                )
-            else:
-                overflow_findings.append(comment_body)
+        if findings:
+            for f in findings:
+                comment_body = f"**[{agent_name.capitalize()}] {f.title}**\n\n{f.body}"
+                if (
+                    f.file
+                    and f.line
+                    and f.file in line_index
+                    and f.line in line_index[f.file]
+                ):
+                    inline_comments.append(
+                        {
+                            "path": f.file,
+                            "line": f.line,
+                            "side": "RIGHT",
+                            "body": comment_body,
+                        }
+                    )
+                else:
+                    overflow_findings.append(comment_body)
+        else:
+            # Agent output didn't use structured ### Finding N: format — include full write-up
+            # Strip the last "Overall risk:" verdict line before displaying
+            lines = output.strip().splitlines()
+            body = "\n".join(lines[:-1]).strip() if lines else output
+            if body:
+                overflow_findings.append(f"### {agent_name.capitalize()} Review\n\n{body}")
 
     overall = (
         "BLOCK"

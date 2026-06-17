@@ -13,7 +13,7 @@ class Finding:
 def parse_findings(agent_output: str) -> list[Finding]:
     """Extract structured findings from an agent's markdown report."""
     findings = []
-    blocks = re.split(r"\n###\s+Finding\s+\d+", agent_output, flags=re.IGNORECASE)
+    blocks = re.split(r"\n(?:#{2,3}\s+|\*\*)?Finding\s+\d+", agent_output, flags=re.IGNORECASE)
     for block in blocks[1:]:
         title_m = re.match(r"[:\s]*(.+?)(?:\n|$)", block)
         title = title_m.group(1).strip(" *:`") if title_m else "Finding"
